@@ -2,7 +2,7 @@ from base import Language
 from settings import DEFAULT_LANGUAGE
 
 
-class TrainingModeVerbose:
+class ButtonsVerbose:
     language: Language = Language(DEFAULT_LANGUAGE)
 
     @classmethod
@@ -11,20 +11,30 @@ class TrainingModeVerbose:
 
     @classmethod
     @property
-    def numbers_to_words(cls) -> str:
+    def start(cls) -> str:
         if cls.language == Language.RU:
-            return "Число -> Слово"
+            return "Начать тренировку"
         if cls.language == Language.EN:
-            return "Number -> Word"
+            return "Start"
         else:
             raise NotImplemented
 
     @classmethod
     @property
-    def words_to_numbers(cls) -> str:
+    def finish(cls) -> str:
         if cls.language == Language.RU:
-            return "Слово -> Число"
+            return "Закончить тренировку"
         if cls.language == Language.EN:
-            return "Word -> Number"
+            return "Finish"
+        else:
+            raise NotImplemented
+
+    @classmethod
+    @property
+    def next(cls) -> str:
+        if cls.language == Language.RU:
+            return 'Следующее задание'
+        if cls.language == Language.EN:
+             return 'Next'
         else:
             raise NotImplemented
