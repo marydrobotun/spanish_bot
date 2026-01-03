@@ -139,14 +139,16 @@ class MessageGetter:
         cls, right: int, total: int, lang: Language = Language(DEFAULT_LANGUAGE)
     ):
         if lang == Language.RU:
-            return emoji.emojize(f'¡Hasta pronto! Вот статистика текущей тренировки:\n'
+            return emoji.emojize(f':waving_hand: ¡Hasta pronto!\n\n'
+                                 f':bar_chart: Вот статистика текущей тренировки:\n'
                                  f'Общее число ответов: {total}\n'
                                  f'Число правильных ответов: {right}\n'
                                  f'Процент правильных ответов: {html.bold(right/total*100)}%')
         if lang == Language.EN:
-            return emoji.emojize(f'¡Hasta pronto! Here is your training stats:\n'
+            return emoji.emojize(f':waving_hand: ¡Hasta pronto!\n\n'
+                                 f':bar_chart: Here is your training stats:\n'
                                  f'Total answers: {total}\n'
-                                 f'Right answers: {right}\n'
+                                 f':bullseye: Right answers: {right}\n'
                                  f'Right answers percentage: {html.bold(right/total*100)}%')
         else:
             raise NotImplemented
