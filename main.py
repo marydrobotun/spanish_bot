@@ -134,7 +134,7 @@ async def set_mode(callback: CallbackQuery):
     )
 
 
-@dp.callback_query(lambda c: c.data in ('start', 'next'))
+@dp.callback_query(lambda c: c.data in ("start", "next"))
 async def start_training(callback: CallbackQuery):
     builder = InlineKeyboardBuilder()
     ButtonsVerbose.set_language(user_info[callback.from_user.id].base_lang)
@@ -154,14 +154,15 @@ async def start_training(callback: CallbackQuery):
         reply_markup=builder.as_markup(),
     )
 
-@dp.callback_query(lambda c: c.data == 'finish')
+
+@dp.callback_query(lambda c: c.data == "finish")
 async def finish_training(callback: CallbackQuery):
     current_trainings.pop(callback.from_user.id, None)
     await callback.message.answer(
         MessageGetter.get_finish_training_message(
             total=user_stats[callback.from_user.id].total,
             right=user_stats[callback.from_user.id].right,
-            lang=user_info[callback.from_user.id].base_lang
+            lang=user_info[callback.from_user.id].base_lang,
         ),
     )
 
@@ -170,8 +171,8 @@ async def finish_training(callback: CallbackQuery):
 async def text_handler(message: Message) -> None:
     builder = InlineKeyboardBuilder()
     ButtonsVerbose.set_language(user_info[message.from_user.id].base_lang)
-    builder.button(text=ButtonsVerbose.finish, callback_data='finish')
-    builder.button(text=ButtonsVerbose.next,callback_data='next')
+    builder.button(text=ButtonsVerbose.finish, callback_data="finish")
+    builder.button(text=ButtonsVerbose.next, callback_data="next")
     builder.adjust(1, 1)
 
     if message.from_user.id in current_trainings.keys():

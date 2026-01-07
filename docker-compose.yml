@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  #bot:
+  #  build: ./bot
+  #  container_name: tg_bot
+  #  restart: always
+  #  env_file:
+  #    - .env
+  #  depends_on:
+  #    - postgres
+  #    - redis
+  #  command: python main.py
+
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: bot
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "admin"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+
+  redis:
+    image: redis:7.2-bookworm
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres-db-volume:

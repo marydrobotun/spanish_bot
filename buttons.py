@@ -33,8 +33,8 @@ class ButtonsVerbose:
     @property
     def next(cls) -> str:
         if cls.language == Language.RU:
-            return 'Следующее задание'
+            return "Следующее задание"
         if cls.language == Language.EN:
-             return 'Next'
+            return "Next"
         else:
             raise NotImplemented
