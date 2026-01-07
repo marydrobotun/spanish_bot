@@ -1,5 +1,8 @@
 from sqlalchemy import select
+from sqlalchemy.dialects.postgresql import insert
+
 from db.models import User
+
 
 class UserRepository:
     def __init__(self, session_factory):
@@ -14,5 +17,7 @@ class UserRepository:
 
     async def create_if_not_exists(self, user_id: int):
         async with self.session_factory() as session:
-            session.add(User(id=user_id))
+            stmt = insert(User).values(id=user_id)
+            stmt = stmt.on_conflict_do_nothing(index_elements=[User.id])
+            await session.execute(stmt)
             await session.commit()
