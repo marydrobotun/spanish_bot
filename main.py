@@ -54,7 +54,7 @@ async def command_start_handler(message: Message, lang: str) -> None:
     await message.answer(
         MessageGetter.get_start_message(
             username=message.from_user.full_name,
-            lang=user_info[message.from_user.id].base_lang,
+            lang=Language(lang),
         ),
         reply_markup=builder.as_markup(),
     )

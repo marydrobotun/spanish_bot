@@ -145,7 +145,7 @@ class MessageGetter:
                 f':bar_chart: Вот статистика текущей тренировки:\n'
                 f'Общее число ответов: {total}\n'
                 f'Число правильных ответов: {right}\n'
-                f'Процент правильных ответов: {html.bold(right / total * 100)}%'
+                f'Процент правильных ответов: {html.bold(right / (total | 1) * 100)}%'
             )
         if lang == Language.EN:
             return emoji.emojize(
@@ -153,7 +153,7 @@ class MessageGetter:
                 f':bar_chart: Here is your training stats:\n'
                 f'Total answers: {total}\n'
                 f':bullseye: Right answers: {right}\n'
-                f'Right answers percentage: {html.bold(right / total * 100)}%'
+                f'Right answers percentage: {html.bold(right / (total | 1) * 100)}%'
             )
         else:
             raise NotImplementedError
