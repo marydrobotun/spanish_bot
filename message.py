@@ -112,6 +112,15 @@ MESSAGES: dict[Language, LanguageMessages] = {
 
 class MessageGetter:
     @classmethod
+    def _msg(cls, key: MessageKey, lang: Language) -> str:
+        try:
+            return MESSAGES[lang][key]
+        except KeyError:
+            raise NotImplementedError(
+                f"Message '{key}' not implemented for language '{lang.name}'"
+            )
+
+    @classmethod
     def get_start_message(
         cls, username: str, lang: Language = Language(DEFAULT_LANGUAGE)
     ) -> str:
