@@ -13,9 +13,9 @@ class TrainingModeVerbose:
     @property
     def numbers_to_words(cls) -> str:
         if cls.language == Language.RU:
-            return "Число -> Слово"
+            return 'Число -> Слово'
         if cls.language == Language.EN:
-            return "Number -> Word"
+            return 'Number -> Word'
         else:
             raise NotImplemented
 
@@ -23,8 +23,8 @@ class TrainingModeVerbose:
     @property
     def words_to_numbers(cls) -> str:
         if cls.language == Language.RU:
-            return "Слово -> Число"
+            return 'Слово -> Число'
         if cls.language == Language.EN:
-            return "Word -> Number"
+            return 'Word -> Number'
         else:
             raise NotImplemented

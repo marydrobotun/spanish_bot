@@ -13,9 +13,9 @@ class LevelsVerbose:
     @property
     def easy(cls) -> str:
         if cls.language == Language.RU:
-            return "Легкий"
+            return 'Легкий'
         if cls.language == Language.EN:
-            return "Easy"
+            return 'Easy'
         else:
             raise NotImplemented
 
@@ -23,9 +23,9 @@ class LevelsVerbose:
     @property
     def medium(cls) -> str:
         if cls.language == Language.RU:
-            return "Средний"
+            return 'Средний'
         if cls.language == Language.EN:
-            return "Medium"
+            return 'Medium'
         else:
             raise NotImplemented
 
@@ -33,8 +33,8 @@ class LevelsVerbose:
     @property
     def hard(cls) -> str:
         if cls.language == Language.RU:
-            return "Сложный"
+            return 'Сложный'
         if cls.language == Language.EN:
-            return "Hard"
+            return 'Hard'
         else:
             raise NotImplemented

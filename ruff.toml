@@ -1,0 +1,76 @@
+
+line-length = 88
+
+# Пути для анализа (по умолчанию: .)
+target-version = "py312"
+
+# Включаем форматирование (как ruff format)
+
+
+# -------------------------------
+# Настройки линтинга
+# -------------------------------
+[lint]
+# Выбор правил (игнорируем все, включаем только нужные)
+select = [
+    "E",  # pycodestyle ошибки
+    "W",  # pycodestyle предупреждения
+    "F",  # pyflakes
+    "I",  # isort (сортировка импортов)
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+
+# Игнорируем эти правила
+ignore = [
+    "E501",  # слишком длинные строки
+    "B008",  # не используй вызовы функций в аргументах по умолчанию
+]
+
+# Длина строки
+
+# Настройка isort (сортировка импортов)
+[lint.isort]
+lines-after-imports = 2
+split-on-trailing-comma = true
+
+# Настройки для конкретных правил
+[lint.per-file-ignores]
+# Игнорировать неиспользуемые импорты в __init__.py
+"__init__.py" = ["F401"]
+# В тестах разрешаем более длинные имена
+"tests/*" = ["B006", "B008"]
+
+# -------------------------------
+# Настройки форматирования
+# -------------------------------
+[format]
+indent-style = "space"
+quote-style = "single"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+# -------------------------------
+# Дополнительные настройки
+# -------------------------------
+# Исключаем определенные файлы и папки
+exclude = [
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "build",
+    "dist",
+    "node_modules",
+    "*.pyc",
+    "*.so",
+    "*.dylib",
+    "Dockerfile",
+    "docker-compose.yml",
+    "**/migrations/*.py",
+]

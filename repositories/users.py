@@ -4,6 +4,7 @@ from sqlalchemy.dialects.postgresql import insert
 from db.models import User
 from settings import DEFAULT_LANGUAGE
 
+
 class UserRepository:
     def __init__(self, session_factory):
         self.session_factory = session_factory

@@ -13,9 +13,9 @@ class ButtonsVerbose:
     @property
     def start(cls) -> str:
         if cls.language == Language.RU:
-            return "Начать тренировку"
+            return 'Начать тренировку'
         if cls.language == Language.EN:
-            return "Start"
+            return 'Start'
         else:
             raise NotImplemented
 
@@ -23,9 +23,9 @@ class ButtonsVerbose:
     @property
     def finish(cls) -> str:
         if cls.language == Language.RU:
-            return "Закончить тренировку"
+            return 'Закончить тренировку'
         if cls.language == Language.EN:
-            return "Finish"
+            return 'Finish'
         else:
             raise NotImplemented
 
@@ -33,8 +33,8 @@ class ButtonsVerbose:
     @property
     def next(cls) -> str:
         if cls.language == Language.RU:
-            return "Следующее задание"
+            return 'Следующее задание'
         if cls.language == Language.EN:
-            return "Next"
+            return 'Next'
         else:
             raise NotImplemented

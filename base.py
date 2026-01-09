@@ -1,10 +1,10 @@
-from enum import Enum
 import dataclasses
+from enum import Enum
 
 
 class Language(Enum):
-    RU = "ru"
-    EN = "en"
+    RU = 'ru'
+    EN = 'en'
 
 
 @dataclasses.dataclass
