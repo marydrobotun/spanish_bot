@@ -3,6 +3,111 @@ from aiogram import html
 
 from base import Language
 from settings import DEFAULT_LANGUAGE
+from typing import Literal, TypedDict
+from enum import Enum
+
+class TrainingMode(Enum):
+    NUMBERS_TO_WORDS = "numbers_to_words"
+    WORDS_TO_NUMBERS = "words_to_numbers"
+
+
+# ===== Message keys =====
+
+MessageKey = Literal[
+    "start",
+    "language_chosen",
+    "choose_level",
+    "level_chosen",
+    "choose_mode",
+    "mode_chosen",
+    "training_prompt",
+    "guess_numbers_to_words",
+    "guess_words_to_numbers",
+    "right",
+    "wrong",
+    "finish",
+]
+
+
+# ===== TypedDict for language messages =====
+
+class LanguageMessages(TypedDict):
+    start: str
+    language_chosen: str
+    choose_level: str
+    level_chosen: str
+    choose_mode: str
+    mode_chosen: str
+    training_prompt: str
+    guess_numbers_to_words: str
+    guess_words_to_numbers: str
+    right: str
+    wrong: str
+    finish: str
+
+
+# ===== Messages storage =====
+
+MESSAGES: dict[Language, LanguageMessages] = {
+    Language.RU: {
+        "start": (
+            "Hola, {username}! Давай тренировать испанские числительные :Spain:\n"
+            "Выбери базовый язык:"
+        ),
+        "language_chosen": (
+            "Базовый язык установлен. Используй /train чтобы начать тренировку."
+        ),
+        "choose_level": "Выбери уровень сложности:",
+        "level_chosen": "Уровень сложности установлен.",
+        "choose_mode": "Выбери режим тренировки:",
+        "mode_chosen": "Режим тренировки установлен.",
+        "training_prompt": (
+            "Отлично, нажми на кнопку, чтобы начать тренировку, когда будешь готов."
+        ),
+        "guess_numbers_to_words": "Как по-испански будет {value}?",
+        "guess_words_to_numbers": 'Что означает "{value}"? Напиши число.',
+        "right": ":check_mark_button: Правильно!",
+        "wrong": (
+            ":cross_mark: Не совсем! Правильный ответ: {answer}"
+        ),
+        "finish": (
+            ":waving_hand: ¡Hasta pronto!\n\n"
+            ":bar_chart: Вот статистика текущей тренировки:\n"
+            "Общее число ответов: {total}\n"
+            "Число правильных ответов: {right}\n"
+            "Процент правильных ответов: {percent}%"
+        ),
+    },
+    Language.EN: {
+        "start": (
+            "Hola, {username}! Lets train spanish numbers together :Spain:\n"
+            "Please choose a base language:"
+        ),
+        "language_chosen": (
+            "Base language has been set. Start a new training by using /train."
+        ),
+        "choose_level": "Please choose a difficulty level:",
+        "level_chosen": "The difficulty level has been set.",
+        "choose_mode": "Please choose a training mode:",
+        "mode_chosen": "The training mode has been set.",
+        "training_prompt": (
+            "Great! Now press the button below whenever you are ready to train."
+        ),
+        "guess_numbers_to_words": "How to say {value} in Spanish?",
+        "guess_words_to_numbers": 'What does "{value}" mean? Write a number.',
+        "right": ":check_mark_button: Right!",
+        "wrong": (
+            ":cross_mark: Wrong answer! The right answer is: {answer}"
+        ),
+        "finish": (
+            ":waving_hand: ¡Hasta pronto!\n\n"
+            ":bar_chart: Here is your training stats:\n"
+            "Total answers: {total}\n"
+            "Right answers: {right}\n"
+            "Right answers percentage: {percent}%"
+        ),
+    },
+}
 
 
 class MessageGetter:
@@ -145,7 +250,7 @@ class MessageGetter:
                 f':bar_chart: Вот статистика текущей тренировки:\n'
                 f'Общее число ответов: {total}\n'
                 f'Число правильных ответов: {right}\n'
-                f'Процент правильных ответов: {html.bold(right / (total | 1) * 100)}%'
+                f'Процент правильных ответов: {html.bold(right / total * 100)}%'
             )
         if lang == Language.EN:
             return emoji.emojize(
@@ -153,7 +258,7 @@ class MessageGetter:
                 f':bar_chart: Here is your training stats:\n'
                 f'Total answers: {total}\n'
                 f':bullseye: Right answers: {right}\n'
-                f'Right answers percentage: {html.bold(right / (total | 1) * 100)}%'
+                f'Right answers percentage: {html.bold(right / total * 100)}%'
             )
         else:
             raise NotImplementedError
